@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+	name="easy-module-template"
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<requiredProperties>
+        <requiredProperty key="artifactId" />
+		<requiredProperty key="artifactId_underscores" />
+        <requiredProperty key="description"/>
+		<requiredProperty key="groupId">
+			<defaultValue>nl.knaw.dans.easy</defaultValue>
+		</requiredProperty>
+        <requiredProperty key="name" />
+        <requiredProperty key="package" />
+        <requiredProperty key="version">
+            <defaultValue>1.x-SNAPSHOT</defaultValue>
+        </requiredProperty>
+	</requiredProperties>
+	<fileSets>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="false" encoding="UTF-8">
+			<directory>.github</directory>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>
