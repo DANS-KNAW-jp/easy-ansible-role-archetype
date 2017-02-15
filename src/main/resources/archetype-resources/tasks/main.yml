@@ -1,0 +1,2 @@
+- include: install.yml
+  when: ansible_local.versions.${artifactId_underscores} != ${artifactId_underscores}_version or (force_reinstalls|bool)

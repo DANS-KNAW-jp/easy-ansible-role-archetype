@@ -1,0 +1,23 @@
+- name: Install LSB to read OS version
+  yum: name=redhat-lsb-core
+
+- name: reload variables (redhat-lsb-core does not work without this step)
+  setup:
+
+# Hack fix to force ansible to evaluate the variable, as it might not be in scope in easy-includes
+- local_action: command echo {{ ${artifactId_underscores}_version }}
+  become: no
+  register: mod_version
+
+- name: Stop the service
+  service: name=${artifactId} state=stopped
+  when: ansible_local.versions.${artifactId_underscores} is not none
+  ignore_errors: true
+
+- include_role:
+    name: dans.easy-includes
+    tasks_from: install_easy_module_cmd
+  vars:
+    easy_modules_installation_base_path: "/usr/local"
+    easy_module_name: ${artifactId}
+    easy_module_version: '{{ mod_version.stdout }}'

@@ -1,0 +1,2 @@
+${artifactId_underscores}_version: "1.x-SNAPSHOT"
+# Add defaults for all variables that are used in install.yml
