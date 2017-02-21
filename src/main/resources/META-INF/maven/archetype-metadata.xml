@@ -5,14 +5,14 @@
 	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<requiredProperties>
-        <requiredProperty key="artifactId" />
-		<requiredProperty key="artifactId_underscores" />
+		<requiredProperty key="artifactId" />
+        <requiredProperty key="module_name" />
+		<requiredProperty key="module_name_underscores" />
         <requiredProperty key="description"/>
 		<requiredProperty key="groupId">
 			<defaultValue>nl.knaw.dans.easy</defaultValue>
 		</requiredProperty>
         <requiredProperty key="name" />
-        <requiredProperty key="package" />
         <requiredProperty key="version">
             <defaultValue>1.x-SNAPSHOT</defaultValue>
         </requiredProperty>

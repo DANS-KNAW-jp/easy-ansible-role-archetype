@@ -1,2 +1,4 @@
 - include: install.yml
-  when: ansible_local.versions.${artifactId_underscores} != ${artifactId_underscores}_version or (force_reinstalls|bool)
+  when: (ansible_local is undefined)
+        or (ansible_local.${module_name_underscores} is undefined)
+        or ((force_reinstalls is defined) and (force_reinstalls|bool))

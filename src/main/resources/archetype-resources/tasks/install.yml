@@ -1,23 +1,49 @@
-- name: Install LSB to read OS version
-  yum: name=redhat-lsb-core
-
-- name: reload variables (redhat-lsb-core does not work without this step)
-  setup:
-
-# Hack fix to force ansible to evaluate the variable, as it might not be in scope in easy-includes
-- local_action: command echo {{ ${artifactId_underscores}_version }}
+# Hack fix to force ansible to evaluate the variable, as it may not be in scope in easy-includes
+- local_action: command echo {{ ${module_name_underscores}_version }}
   become: no
   register: mod_version
 
-- name: Stop the service
-  service: name=${artifactId} state=stopped
-  when: ansible_local.versions.${artifactId_underscores} is not none
-  ignore_errors: true
+- include_role:
+    name: dans.easy-includes
+    tasks_from: install_easy_module
+  vars:
+    easy_module_name: "${module_name}"
+    easy_module_version: "{{ mod_version.stdout }}"
 
 - include_role:
     name: dans.easy-includes
-    tasks_from: install_easy_module_cmd
+    tasks_from: install_cmd
   vars:
-    easy_modules_installation_base_path: "/usr/local"
-    easy_module_name: ${artifactId}
-    easy_module_version: '{{ mod_version.stdout }}'
+    easy_module_name: "${module_name}"
+    easy_module_version: "{{ mod_version.stdout }}"
+
+- include_role:
+    name: dans.easy-includes
+    tasks_from: install_service
+  vars:
+    easy_module_name: "${module_name}"
+    easy_module_version: "{{ mod_version.stdout }}"
+
+#
+# Put the module specific configuration here, if needed. This may include creating databases and other
+# resources.
+#
+# DELETE THIS COMMENT !!!
+#
+
+# Uncomment the below part and fill in configuration parameters that need to be different from the "reasonable defaults".
+# If none are needed, DELETE THIS PART !!!
+#
+#- name: Configure application
+#  replace: dest={{ easy_modules_installation_base_path }}/${module_name_underscores}/cfg/application.properties
+#           regexp="^{{ item.key }}.*$"
+#           replace="{{ item.key }}={{ item.value }}"
+#  with_items:
+#    - { key: 'configuration-setting',  value: '{{ configuration_parameter_ansible_variable }}' }
+
+- include_role:
+    name: dans.easy-includes
+    tasks_from: start_service
+  vars:
+    easy_module_name: "${module_name}"
+    easy_module_version: "{{ mod_version.stdout }}"
