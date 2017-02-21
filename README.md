@@ -10,9 +10,10 @@ SYNOPSIS
                 -DarchetypeArtifactId=easy-ansible-role-archetype \ 
                 -DarchetypeVersion=1.x-SNAPSHOT \
                 -DartifactId=dans.easy-test-module \
-                -DartifactId_underscores=easy_test_module \
+                -Dmodule_name=easy-test-module \
+                -Dmodule_name_underscores=easy_test_module \
                 -Dname="EASY Test Module Ansible Role" \
-                -Ddescription="An Ansible role to install easy-module on RHEL 6 or 7" 
+                -Ddescription="An Ansible role to install easy-test-module on RHEL 6 or 7" 
 
 
 DESCRIPTION
