@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>nl.knaw.dans.shared</groupId>
+        <artifactId>dans-prototype</artifactId>
+        <version>1.42</version>
+    </parent>
     <groupId>nl.knaw.dans.easy</groupId>
     <artifactId>easy-ansible-role-archetype</artifactId>
     <version>1.x-SNAPSHOT</version>
@@ -11,9 +16,6 @@
         <developerConnection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
         <tag>HEAD</tag>
     </scm>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <build>
         <extensions>
             <extension>
