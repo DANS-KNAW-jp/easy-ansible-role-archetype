@@ -35,7 +35,7 @@
 # If none are needed, DELETE THIS PART !!!
 #
 #- name: Configure application
-#  replace: dest={{ easy_modules_installation_base_path }}/${module_name_underscores}/cfg/application.properties
+#  replace: dest={{ easy_modules_installation_base_path }}/${module_name}/cfg/application.properties
 #           regexp="^{{ item.key }}.*$"
 #           replace="{{ item.key }}={{ item.value }}"
 #  with_items:
