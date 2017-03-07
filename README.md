@@ -6,8 +6,8 @@ easy-ansible-role-archetype
 SYNOPSIS
 --------
 
-      mvn archetype:generate -DarchetypeGroupId=nl.knaw.dans.easy \     
-                -DarchetypeArtifactId=easy-ansible-role-archetype \ 
+      mvn archetype:generate -DarchetypeGroupId=nl.knaw.dans.easy \
+                -DarchetypeArtifactId=easy-ansible-role-archetype \
                 -DarchetypeVersion=1.x-SNAPSHOT \
                 -DartifactId=dans.easy-test-module \
                 -Dmodule_name=easy-test-module \
@@ -19,8 +19,8 @@ SYNOPSIS
 DESCRIPTION
 -----------
 
-Creates an EASY ansible role project, prepopulated with common files and structure. It uses the 
-[maven archetype plugin]. Each EASY module should have an accompanying [Ansible role] that installs
+Creates an [EASY] ansible role project, prepopulated with common files and structure as required by Ansible.
+It uses the [maven archetype plugin]. Each EASY module should have an accompanying [Ansible role] that installs
 and configures it on a target machine. If the role is made available as a GitHub project, it can be
 installed directly with the [ansible-galaxy] command. 
 
@@ -31,8 +31,34 @@ installed directly with the [ansible-galaxy] command.
 
 ### Example usage
 
-See SYNOPSIS. This will create a project called `dans.easy-test-module`.  The project has a standard layout, which is required by
-Ansible. 
+Like the synopsis the example below will create a project called `dans.easy-test-module`.
+The variables prevent typo variations in the actual name of the module but you will still have
+to adjust the value for the `-Dname` parameter. You won't get a chance to correct the name as
+is possible for the version and package.
+Note that trailing white space invalidates the continuation symbols.
+
+      export MODULE_NAME=test-module
+      export MODULE_NAME_UNDERSCORES="echo $MODULE_NAME | sed 's/-/_/g'"
+      mvn archetype:generate -DarchetypeGroupId=nl.knaw.dans.easy \
+                -DarchetypeArtifactId=easy-ansible-role-archetype \
+                -DarchetypeVersion=1.x-SNAPSHOT \
+                -DartifactId=dans.easy-$MODULE_NAME \
+                -Dmodule_name=easy-$MODULE_NAME \
+                -Dmodule_name_underscores=easy_$MODULE_NAME_UNDERSCORES \
+                -Dname="EASY Test Module Ansible Role" \
+                -Ddescription="An Ansible role to install easy-$MODULE_NAME on RHEL 6 or 7"
+
+**Further conventions at [DANS]**
+
+Create the project while you are in the directory `~/git/dtap/roles`. Finish project creation with a commit.
+No variable in the initial commit example, this time autocompletion can prevent typos:
+
+      cd dans.easy-test-module
+      git init; git stage -A; git commit -m "created by archetype"
+
+[DANS]: https://github.com/DANS-KNAW
+[EASY]: https://dans.knaw.nl/nl/over/diensten/data-archiveren-en-hergebruiken/easy
+
 
 ARGUMENTS
 ----------
